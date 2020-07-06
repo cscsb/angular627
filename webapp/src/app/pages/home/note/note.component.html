@@ -38,16 +38,15 @@
 	</nz-header>
 	<nz-layout style="background-color: #fff;">
 		<nz-sider
-			[nzWidth]="550"
+			nzWidth="35%"
 			style="padding-left: 24px; margin-bottom: 16px; overflow: hidden;"
 		>
 			<div
 				style="
 					overflow: scroll;
 					height: calc(100% + 20px);
-					width: 100%;
+					width: 95%;
 					position: relative;
-					right: -20px;
 				"
 			>
 				<app-note2
@@ -59,7 +58,7 @@
 				></app-note2>
 			</div>
 		</nz-sider>
-		<nz-content style="overflow: hidden;">
+		<nz-content style="overflow: hidden;" nzWidth="65%">
 			<div
 				class="example-container flex"
 				style="

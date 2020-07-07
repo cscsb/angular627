@@ -3,41 +3,72 @@
         webapp
     </div>
 </div>
-<div [ngClass]="{'box':translate}">
-    <div class="login-box front">
-        <div class="title">用户登录 / User Login</div>
-        <form #userForm="ngForm" class="example-form">
-            <mat-form-field class="example-full-width">
-                <mat-label>用户名</mat-label>
-                <input id="userName" required matInput #userName='ngModel' [(ngModel)]="user.username" name="userName"
-                       placeholder="用户名">
-                <mat-error *ngIf="userName.invalid">用户名不能为空</mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width">
-                <mat-label>输入密码</mat-label>
-                <input id="password" required matInput #password='ngModel' [(ngModel)]="user.password" name="password"
-                       placeholder="密码" [type]="hide ? 'password' : 'text'">
-                <button mat-icon-button matSuffix (click)="hide = !hide"
-                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                    <mat-icon style="height: 2.2em">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-                <mat-error *ngIf="password.invalid">密码不能为空</mat-error>
-            </mat-form-field>
-        </form>
-        <section>
-            <div class="example-button-row">
-                <button [disabled]="!userForm.form.valid" mat-raised-button style="width: 100%" color="primary"
-                        (click)="login()">登录
-                </button>
-            </div>
-        </section>
-        <div class="version">
-            <span> 版本号: 1.0</span>
-            <a (click)="showModal()" style="margin-left: 10px">找回密码</a>
-            <a (click)="resetShowModal()" style="margin-left: 10px">重置</a>
-            <a (click)="registerBox()" style="margin-left: 10px">注册 >></a>
-        </div>
-    </div>
+<div [ngClass]="{ 'box': translate }">
+	<div class="login-box front">
+		<div class="title">用户登录 / User Login</div>
+		<form #userForm="ngForm" class="example-form">
+			<mat-form-field class="example-full-width">
+				<mat-label>输入邮箱</mat-label>
+				<input
+					id="usersEmail"
+					email
+					required
+					matInput
+					#userEmail="ngModel"
+					[(ngModel)]="user.email"
+					name="userEmail"
+					placeholder="邮箱"
+					[type]="'email'"
+				/>
+				<mat-error *ngIf="userEmail.errors?.email">邮箱输入错误</mat-error>
+				<mat-error *ngIf="userEmail.errors?.required">密码不能为空</mat-error>
+			</mat-form-field>
+			<mat-form-field class="example-full-width">
+				<mat-label>输入密码</mat-label>
+				<input
+					id="password"
+					required
+					matInput
+					#password="ngModel"
+					[(ngModel)]="user.password"
+					name="password"
+					placeholder="密码"
+					[type]="hide ? 'password' : 'text'"
+				/>
+				<button
+					mat-icon-button
+					matSuffix
+					(click)="hide = !hide"
+					[attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide"
+				>
+					<mat-icon style="height: 2.2em;">{{
+						hide ? "visibility_off" : "visibility"
+					}}</mat-icon>
+				</button>
+				<mat-error *ngIf="password.invalid">密码不能为空</mat-error>
+			</mat-form-field>
+		</form>
+		<section>
+			<div class="example-button-row">
+				<button
+					[disabled]="!userForm.form.valid"
+					mat-raised-button
+					style="width: 100%;"
+					color="primary"
+					(click)="login()"
+				>
+					登录
+				</button>
+			</div>
+		</section>
+		<div class="version">
+			<span> 版本号: 1.0</span>
+			<a (click)="showModal()" style="margin-left: 10px;">找回密码</a>
+			<a (click)="resetShowModal()" style="margin-left: 10px;">重置</a>
+			<a (click)="registerBox()" style="margin-left: 10px;">注册 >></a>
+		</div>
+	</div>
 
     <div class="login-box back">
         <div class="title">用户注册 / User Login</div>

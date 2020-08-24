@@ -38,12 +38,13 @@ export class NoteService {
     // 获取菜单列表
     getMenus() {
         const url = this.url.getUrl(Api.menuList);
-        return this.http.post(url, {}).pipe(
-            map((res: Res) => {
+        return this.http.get(url, {}).pipe(
+            map((res: Menu[]) => {
                 // 转换tree结构
-                const data: Menu[] = res.data;
+                const data: Menu[] = res;
+                console.log(data);
 
-                if (res.data instanceof Array) {
+                if (data instanceof Array) {
                     // res.data = data.map(item => {
                     //     return Object.assign(item, {
                     //         title: item.name,
@@ -52,9 +53,9 @@ export class NoteService {
                     //         children: item.child
                     //     })
                     // })
-                    this.setTreeData(res.data);
+                    this.setTreeData(data);
                 } else {
-                    res.data = [];
+                    res = [];
                 }
                 return res;
             })
@@ -64,7 +65,7 @@ export class NoteService {
     // 获取菜单列表
     getUser() {
         const url = this.url.getUrl(Api.me);
-        return this.http.post(url, {});
+        return this.http.get(url, {});
     }
 
     // 获取Uuid

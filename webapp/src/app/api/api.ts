@@ -10,7 +10,7 @@ export class Api {
     static resetPwd = 'auth/resetPwd'; // 重置
 
     /** 业务接口  **/
-    static menuList = 'api/menu/list'; // 显示网站内容
+    static menuList = 'menus'; // 显示网站内容
     static addItem = 'api/menu/addItem'; // 添加子节点
     static menuItem = 'api/menu/menuItem'; // 获取父节点下的所有节点
     static updateItem = 'api/menu/updateItem'; //更新子节点

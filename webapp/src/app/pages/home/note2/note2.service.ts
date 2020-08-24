@@ -28,7 +28,7 @@ export class Note2Service {
 
     // 新增文件夹
 
-    addFile(data: Menu) {
+    addFile(data) {
         const url = this.url.getUrl(Api.addMenu);
         return this.http.post(url, data);
     }
@@ -36,11 +36,11 @@ export class Note2Service {
     // 修改文件夹
 
     editFile(data: {
-        mid: number,
-        name: string
+        menuId: number,
+        menuName: string
     }) {
         const url = this.url.getUrl(Api.updateMenu);
-        return this.http.post(url, data);
+        return this.http.put(url, data);
     }
 
     // 删除文件夹

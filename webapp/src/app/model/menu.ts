@@ -1,9 +1,9 @@
 export class Menu {
-    name: string;
-    orderid?: number;
-    pid?: number;
-    uid?: number | string;
-    username?: string;
-    id?: number | string;
+    menuName: string;
+    orderId?: number;
+    pId?: number;
+    uId?: number | string;
+    userName?: string;
+    menuId?: number | string;
     child?: Array<any>;
 }

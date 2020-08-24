@@ -53,7 +53,7 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
 
     Visible = false;
     isOkLoading = false;
-    addFileItem: { name: string, pid: number } = {name: '', pid: this.pid};
+    addFileItem: { menuName: string, pid: number } = {menuName: '', pid: this.pid};
 
     openFolder(data: NzTreeNode | NzFormatEmitEvent): void {
         // do something if u want
@@ -140,7 +140,7 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
         }
 
         this.editName = null;
-
+        console.log(node);
         this.editFile(node);
     }
 
@@ -166,7 +166,7 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
 
     // 更新文件夹
     editFile(data) {
-        this.note2Service.editFile({mid: data.key, name: data.title}).subscribe(
+        this.note2Service.editFile({menuId: data.key, menuName: data.title}).subscribe(
             res => {
                 this.menuList.emit();
             }

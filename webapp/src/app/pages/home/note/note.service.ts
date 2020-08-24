@@ -108,8 +108,8 @@ export class NoteService {
     setTreeData(data) {
         data = data.map(item => {
             return Object.assign(item, {
-                title: item.name,
-                key: item.id,
+                title: item.menuName,
+                key: item.menuId,
                 expanded: false,
                 children: item.child ? this.setTreeData(item.child) : []
             });

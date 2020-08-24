@@ -109,7 +109,7 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
         this.treeNode.isSpinning = true;
         this.noteService.getMenus().subscribe(res => {
             this.treeNode.isSpinning = false;
-            this.treeNode.nodes = res.data;
+            this.treeNode.nodes = res;
             if (this.treeNode.activatedNode && key === this.treeNode.activatedNode.key) {
                 this.clearList();
             }

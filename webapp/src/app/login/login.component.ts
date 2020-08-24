@@ -5,6 +5,7 @@ import {LoginService} from './login.service';
 import {RegisterUser, ResetPwd, User} from '../model/user';
 import {Res} from '../model/response';
 import {NzMessageService} from 'ng-zorro-antd';
+import {LoginToken} from '../model/login-token';
 
 @Component({
     selector: 'app-login',
@@ -58,20 +59,18 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
-        this.loginService.login(this.user).subscribe((res: Res) => {
-            if (res.code === 200) {
-                // 设置token
-                this.loginService.tokenSubject.next(res.data.access_token);
+        console.log('loggin in ');
+        this.loginService.login(this.user).subscribe((res: LoginToken) => {
+            this.loginService.tokenSubject.next(res.token);
 
-                // 保存token至sessionStorage
-                sessionStorage.setItem('token', res.data.access_token);
+            // 保存token至sessionStorage
+            sessionStorage.setItem('token', res.token);
 
-                this.router.navigate(['home']);
-
-            } else {
-                this.messageService.warning(res.message);
-            }
-        });
+            this.router.navigate(['/home']);
+        },
+            (error) => {
+                this.messageService.warning('Invalid login');
+            });
     }
 
     register() {

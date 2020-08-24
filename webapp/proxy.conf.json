@@ -1,7 +1,11 @@
 {
   "/api/*": {
-    "target": "http://ppssii.com/",
+    "target": "http://ppssii.com",
     "secure": false,
-    "changeOrigin": true
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

@@ -9,7 +9,7 @@
         <form #userForm="ngForm" class="example-form">
             <mat-form-field class="example-full-width">
                 <mat-label>用户名</mat-label>
-                <input id="userName" required matInput #userName='ngModel' [(ngModel)]="user.username" name="userName"
+                <input id="userName" required matInput #userName='ngModel' [(ngModel)]="user.userName" name="userName"
                        placeholder="用户名">
                 <mat-error *ngIf="userName.invalid">用户名不能为空</mat-error>
             </mat-form-field>
@@ -45,7 +45,7 @@
             <mat-form-field class="example-full-width">
                 <mat-label>用户名</mat-label>
                 <input id="registerUserName" required matInput #registerUserName='ngModel'
-                       [(ngModel)]="registerUser.username" name="registerUserName"
+                       [(ngModel)]="registerUser.userName" name="registerUserName"
                        placeholder="用户名">
                 <mat-error *ngIf="registerUserName.invalid">用户名不能为空</mat-error>
             </mat-form-field>

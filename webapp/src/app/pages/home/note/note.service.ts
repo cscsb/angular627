@@ -8,7 +8,7 @@ import {Menu} from '../../../model/menu';
 import {Res} from '../../../model/response';
 
 interface Item {
-    mid?: number | string;
+    pId?: number | string;
     content?: string;
 }
 
@@ -82,14 +82,15 @@ export class NoteService {
 
     // 获取子节点
     getItems(data: Item) {
+        console.log(data);
         const url = this.url.getUrl(Api.menuItem);
-        return this.http.post(url, data);
+        return this.http.get(url + '/' + data.pId);
     }
 
     // 删除子节点
     editItem(data: { itemid: number, content: string }) {
         const url = this.url.getUrl(Api.updateItem);
-        return this.http.post(url, data);
+        return this.http.put(url, data);
     }
 
 

@@ -10,6 +10,7 @@ import {LoginService} from '../../../login/login.service';
 import {Note2Service} from '../note2/note2.service';
 import {Note2Component} from '../note2/note2.component';
 import {User} from '../../../model/user';
+import {Item} from '../../../model/item';
 
 @Component({
     selector: 'app-note',
@@ -178,7 +179,7 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
 
     addItem(content: string) {
         const key = this.treeNode.activatedNode.key;
-        this.noteService.addItem({mid: key, content}).subscribe(
+        this.noteService.addItem({pId: key, content}).subscribe(
             res => {
                 this.msgService.success('添加成功');
                 this.getItems();
@@ -187,7 +188,7 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     addItemToOther(key, content: string) {
-        this.noteService.addItem({mid: key, content}).subscribe(
+        this.noteService.addItem({pId: key, content}).subscribe(
             res => {
                 this.msgService.success('移动成功');
             }
@@ -197,10 +198,10 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
     getItems() {
         const key = this.treeNode.activatedNode.key;
         this.isSpinning = true;
-        this.noteService.getItems({mid: key}).subscribe(
-            (res: Res) => {
+        this.noteService.getItems({pId: key}).subscribe(
+            (res: Item[]) => {
                 this.isSpinning = false;
-                this.done = res.data.items;
+                this.done = res;
             }
         );
     }
@@ -266,9 +267,9 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
             takeUntil(this.destroy$) // 退订
         ).subscribe(res => {
             const key = this.treeNode.activatedNode.key;
-            this.noteService.addItem({mid: key, content: res})
+            this.noteService.addItem({pId: key, content: res})
                 .subscribe(
-                    res => {
+                    res2 => {
                         this.msgService.success('添加成功');
                         this.fieldContent = '';
                         this.getItems();

@@ -210,7 +210,8 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
     // 删除节点
     delItem(item) {
         this.isSpinning = true;
-        this.noteService.delItem(item.id).subscribe(
+        console.log(item);
+        this.noteService.delItem(item.itemId).subscribe(
             res => {
                 this.getItems();
             }

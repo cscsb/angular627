@@ -97,7 +97,8 @@ export class NoteService {
     // 删除子节点
     delItem(data) {
         const url = this.url.getUrl(Api.delItem);
-        return this.http.post(url, {itemid: data});
+        console.log(data);
+        return this.http.delete(url + '/' + data, {});
     }
 
     // 笔记排序

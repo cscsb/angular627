@@ -122,25 +122,27 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
 
     getUser() {
         this.noteService.getUser().subscribe((res: any) => {
-            if (res.code === 401) {
-                // 游客
+            this.user = res;
+            // 登录用户
+            this.getMenuList();
+        }, (error) => {
+            console.log(error);
+            if (error.status === 401) {
                 if (!localStorage.getItem('uuid')) {
                     this.getUuid();
+                } else {
+                    this.getMenuList();
                 }
-
-            } else {
-                this.user = res;
-                // 登录用户
-                this.getMenuList();
             }
         });
     }
 
     getUuid() {
-        this.noteService.getUuid().subscribe((res: Res) => {
+        console.log('get uuid');
+        this.noteService.getUuid().subscribe((res: string) => {
             // 设置uuid
-            this.noteService.uuidSubject.next(res.data.uuid);
-            localStorage.setItem('uuid', res.data.uuid);
+            this.noteService.uuidSubject.next(res);
+            localStorage.setItem('uuid', res);
             // 获取菜单
             this.getMenuList();
         });

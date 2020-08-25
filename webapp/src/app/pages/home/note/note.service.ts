@@ -71,7 +71,7 @@ export class NoteService {
     // 获取Uuid
     getUuid() {
         const url = this.url.getUrl(Api.makeUuid);
-        return this.http.post(url, {});
+        return this.http.get(url, {responseType: 'text'});
     }
 
     // 添加子节点

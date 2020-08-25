@@ -46,7 +46,7 @@ export class Note2Service {
     // 删除文件夹
     delFile(data: Menu) {
         const url = this.url.getUrl(Api.delMenu);
-        return this.http.post(url, {mid: data});
+        return this.http.delete(url + '/' + data);
     }
 
     // 修改文件夹节点排序

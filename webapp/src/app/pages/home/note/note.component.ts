@@ -98,7 +98,8 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     editItem(item) {
-        this.noteService.editItem({itemid: item.id, content: item.content})
+        console.log(item);
+        this.noteService.editItem({itemId: item.itemId, content: item.content, pId: item.pId})
             .subscribe(
                 res => {
                     this.getItems();

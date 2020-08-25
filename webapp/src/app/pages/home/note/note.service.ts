@@ -88,7 +88,7 @@ export class NoteService {
     }
 
     // 删除子节点
-    editItem(data: { itemid: number, content: string }) {
+    editItem(data: { itemId: number, content: string, pId: number }) {
         const url = this.url.getUrl(Api.updateItem);
         return this.http.put(url, data);
     }

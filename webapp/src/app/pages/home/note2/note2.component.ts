@@ -19,6 +19,7 @@ import {concatAll, delay, filter, map, switchMap, take, takeUntil} from 'rxjs/op
 import {NoteService} from '../note/note.service';
 import {Note2Service} from './note2.service';
 import {MoveItem} from '../../../model/move-item';
+import {Menu} from '../../../model/menu';
 
 
 @Component({
@@ -98,7 +99,7 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
         // 判断是否为同级移动
         // 判断是否为根结点
         if (!dropNode.parentNode) {
-            this.updateFootMenuSort(event);
+            // this.updateFootMenuSort(event);
             return;
         }
 
@@ -107,19 +108,39 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
             && this.dragNodeParentId === dropNode.parentNode.origin.id) {
             // 同级移动  判断是都同级下排序移动
             // 同一节点下排序
-            this.updateMenuSort(dropNode.parentNode);
+            // this.updateMenuSort(dropNode.parentNode);
         } else {
             // 不同级
             this.moveItem.mid = dropNode.parentNode.origin.id;
             this.moveItem.itemid = dropNode.origin.id;
-            this.dragMoveItem(dropNode.parentNode);
+            // this.dragMoveItem(dropNode.parentNode);
         }
 
     }
 
 
     dragEnd(event: NzFormatEmitEvent): void {
-        console.log(event);
+        let inb = 0;
+        const tmpnode: Menu = new Menu();
+        const menuArr = this.nzTree.getTreeNodes().map((item, index) => {
+            console.log(item);
+            tmpnode.orderId = index + 1;
+            tmpnode.menuId = item.origin.menuId;
+            tmpnode.pId = item.origin.pId;
+            console.log(item.origin.menuName + '-->' + tmpnode.orderId);
+            this.note2Service.updateMenuSort_gen(tmpnode).subscribe(
+                res => {
+                    console.log(res);
+                    inb++;
+                    if (inb ===  this.nzTree.getTreeNodes().length) {
+                        this.menuList.emit();
+                    }
+                }
+            );
+            return item.origin.menuId;
+        });
+
+
     }
 
     startEdit($event, node): void {
@@ -225,9 +246,11 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
 
     // 根结点排序
     updateFootMenuSort(event: NzFormatEmitEvent) {
+        console.log(event);
         const dropNode = event.dragNode; // 移动的节点
         const node = event.node; // 操作的节点
         const parentId = dropNode.parentNode ? dropNode.parentNode.origin.id : 0;
+        /*
         if (dropNode.level === node.level
             && this.dragNodeLevel === dropNode.level
             && this.dragNodeParentId === parentId) {
@@ -241,10 +264,15 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
             this.moveItem.itemid = dropNode.origin.id;
             this.dragMoveRootItem();
         }
+        */
     }
 
     updateRootMenuSort() {
-        const menuArr = this.nzTree.getTreeNodes().map(item => item.origin.id);
+        const menuArr = this.nzTree.getTreeNodes().map(item => {
+            console.log(item);
+            return item.origin.menuId;
+        });
+        console.log(menuArr);
         this.note2Service.updateMenuSort({pid: 0, mid_arr: menuArr}).subscribe(
             res => {
                 console.log(res);
@@ -274,6 +302,7 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
     }
 
     updateMenuSort(node: NzTreeNode) {
+        console.log(node);
         const menuArr = node.children.map(item => item.origin.id);
         this.note2Service.updateMenuSort({pid: node.origin.id, mid_arr: menuArr}).subscribe(
             res => {
@@ -344,7 +373,7 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
                 zip(of(res), fromEvent(treeDivBox, 'mouseup').pipe(
                     filter((res: any) => {
                         return this.el.nativeElement.querySelector('.ant-tree .ant-tree-node-content-wrapper:hover');
-                    }),)
+                    }), )
                 ).pipe(
                     take(1)
                 )),

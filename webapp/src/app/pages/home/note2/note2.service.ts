@@ -52,7 +52,16 @@ export class Note2Service {
     // 修改文件夹节点排序
     updateMenuSort(data: MenuSort) {
         const url = this.url.getUrl(Api.updateMenuSort);
-        return this.http.post(url, data);
+        return this.http.put(url, data);
+    }
+
+    updateMenuSort_gen(menu: Menu) {
+        const data: {menuId: number, orderId: number, pId: number} = {menuId: 0, orderId: 0, pId: 0};
+        data.orderId = menu.orderId;
+        data.pId = menu.pId;
+        data.menuId = menu.menuId;
+        const url = this.url.getUrl(Api.updateMenuSort);
+        return this.http.put(url, data);
     }
 
     // 移动文件夹节点排序

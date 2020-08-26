@@ -4,6 +4,6 @@ export class Menu {
     pId?: number;
     uId?: number | string;
     userName?: string;
-    menuId?: number | string;
+    menuId?: number;
     child?: Array<any>;
 }

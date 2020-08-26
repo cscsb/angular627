@@ -18,7 +18,7 @@ export class Api {
     static delItem = 'api/menu/delItem'; // 删除节点
     static moveItem = 'api/menu/moveItem'; // 移动节点
     static updateItemSort = 'api/menu/updateItemSort'; // 修改子节点排序
-    static updateMenuSort = 'api/menu/updateMenuSort'; // 修改文件夹节点排序
+    static updateMenuSort = 'api/menu/updateMenu'; // 修改文件夹节点排序
     static addMenu = 'api/menu/addMenu'; // 新增父节点
     static delMenu = 'api/menu/delMenu'; // 删除父节点
 }

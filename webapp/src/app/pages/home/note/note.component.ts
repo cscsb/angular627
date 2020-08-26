@@ -11,6 +11,7 @@ import {Note2Service} from '../note2/note2.service';
 import {Note2Component} from '../note2/note2.component';
 import {User} from '../../../model/user';
 import {Item} from '../../../model/item';
+import {Menu} from '../../../model/menu';
 
 @Component({
     selector: 'app-note',
@@ -220,13 +221,33 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //  节点排序
     updateItemSort() {
-        const itemArr = this.done.map(item => item.id);
+        let inb = 0;
+        const tmpnode: Item = new Item();
+        const itemArr = this.done.map((item, index) => {
+            console.log(item);
+            tmpnode.zindex = index + 1;
+            tmpnode.itemId = item.itemId;
+            tmpnode.pId = item.pId;
+            console.log(item.content + '-->' + tmpnode.zindex);
+            this.noteService.updateItemSort_gen(tmpnode).subscribe(
+                res => {
+                    console.log(res);
+                    inb++;
+                    if (inb ===  this.done.length) {
+                        this.getItems();
+                    }
+                }
+            );
+            return item.id;
+        });
+        /*
         const mid = this.done[0].mid;
         this.noteService.updateItemSort({mid, item_id_arr: itemArr}).subscribe(
             res => {
                 this.getItems();
             }
         );
+        */
     }
 
     contextMenu($event: MouseEvent, menu: NzDropdownMenuComponent, item): void {

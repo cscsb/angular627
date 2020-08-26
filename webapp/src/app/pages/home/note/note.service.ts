@@ -6,11 +6,8 @@ import {Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Menu} from '../../../model/menu';
 import {Res} from '../../../model/response';
+import {Item} from '../../../model/item';
 
-interface Item {
-    pId?: number | string;
-    content?: string;
-}
 
 export interface ItemArrSort {
     mid: number | string;
@@ -105,6 +102,15 @@ export class NoteService {
     updateItemSort(data: ItemArrSort) {
         const url = this.url.getUrl(Api.updateItemSort);
         return this.http.post(url, data);
+    }
+
+    updateItemSort_gen(item: Item) {
+        const data: {itemId: number, pId: number, zindex: number} = {itemId: 0, pId: 0, zindex: 0};
+        data.itemId = item.itemId;
+        data.pId = item.pId;
+        data.zindex = item.zindex;
+        const url = this.url.getUrl(Api.updateItemSort);
+        return this.http.put(url, data);
     }
 
     setTreeData(data) {

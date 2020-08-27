@@ -77,6 +77,10 @@ export class LoginComponent implements OnInit {
         this.loginService.register(this.registerUser).subscribe(
             res => {
                 this.messageService.success('注册成功');
+                this.loginBox();
+            },
+            (error) => {
+                this.messageService.warning('Invalid parameters');
             }
         );
     }

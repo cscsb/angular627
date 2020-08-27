@@ -8,6 +8,10 @@ import {Menu} from '../../../model/menu';
 import {Res} from '../../../model/response';
 import {Item} from '../../../model/item';
 
+interface Itemo {
+    pId?: number | string;
+    content?: string;
+}
 
 export interface ItemArrSort {
     mid: number | string;
@@ -72,13 +76,13 @@ export class NoteService {
     }
 
     // 添加子节点
-    addItem(data: Item) {
+    addItem(data: Itemo) {
         const url = this.url.getUrl(Api.addItem);
         return this.http.post(url, data);
     }
 
     // 获取子节点
-    getItems(data: Item) {
+    getItems(data: Itemo) {
         console.log(data);
         const url = this.url.getUrl(Api.menuItem);
         return this.http.get(url + '/' + data.pId);

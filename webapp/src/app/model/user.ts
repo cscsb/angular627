@@ -6,6 +6,8 @@ export class User {
 export class RegisterUser extends User {
     password_confirmation: string;
     email: string;
+    userName: string;
+    password: string;
 }
 
 export class ResetPwd extends RegisterUser{

@@ -77,6 +77,9 @@ export class LoginComponent implements OnInit {
         this.loginService.register(this.registerUser).subscribe(
             res => {
                 this.messageService.success('注册成功');
+                this.user.userName = this.registerUser.userName;
+                this.user.password = this.registerUser.password;
+                this.login();
                 this.loginBox();
             },
             (error) => {

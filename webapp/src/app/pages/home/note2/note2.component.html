@@ -19,9 +19,9 @@
         <ng-template #nzTreeTemplate let-node let-origin="origin">
             <nz-dropdown-menu #menu="nzDropdownMenu">
                 <ul nz-menu>
-<!--                    <li nz-menu-item (click)="copy(node)" class="dropdownMenu">复制</li>-->
+                    <!--                    <li nz-menu-item (click)="copy(node)" class="dropdownMenu">复制</li>-->
                     <li nz-menu-item (click)="cut(node)" class="dropdownMenu">剪切</li>
-                    <li nz-menu-item  (click)="paste(node)" class="dropdownMenu">粘贴</li>
+                    <li nz-menu-item (click)="paste(node)" class="dropdownMenu">粘贴</li>
                 </ul>
             </nz-dropdown-menu>
 
@@ -44,19 +44,40 @@
           <span class="file-name">{{ node.title }}</span>
         </span>
       </span>
-                    <a class="custom-node-icon" style="margin-left: auto" (click)="add($event,node.key)"
+
+
+
+
+
+                    <a class="custom-node-icon" nz-button nz-dropdown [nzDropdownMenu]="menufolder" nzTrigger="click"
                        nz-button nzType="link" nzGhost>
-                        <i nz-icon nzType="file-add" nzTheme="outline"></i>
-                    </a>
-                    <a class="custom-node-icon" (click)="startEdit($event,node)"
-                       nz-button nzType="link" nzGhost>
-                        <i nz-icon nzType="edit" nzTheme="outline"></i>
-                    </a>
-                    <a class="custom-node-icon" (click)="deleteNode($event,node.key)"
-                       nz-button nzType="link" nzGhost>
-                        <i nz-icon nzType="delete" nzTheme="outline"></i>
+                        <i nz-icon nzType="ellipsis" nzTheme="outline"></i>
 
                     </a>
+
+
+                    <nz-dropdown-menu #menufolder="nzDropdownMenu" >
+
+                                <a class="custom-node-icon" style="margin-left: auto;" (click)="add($event,node.key)"
+                                   nz-button nzType="link" nzGhost>
+                                    <i nz-icon nzType="file-add" nzTheme="outline"></i>
+                                </a>
+
+                                <a class="custom-node-icon"  (click)="startEdit($event,node)"
+                                   nz-button nzType="link" nzGhost>
+                                    <i nz-icon nzType="edit" nzTheme="outline"></i>
+                                </a>
+
+                                <a class="custom-node-icon"  (click)="deleteNode($event,node.key)"
+                                   nz-button nzType="link" nzGhost>
+                                    <i nz-icon nzType="delete" nzTheme="outline"></i>
+
+                                </a>
+
+
+                    </nz-dropdown-menu>
+
+
 
                 </div>
                 <input [hidden]="editId !== node.key" type="text" nz-input [(ngModel)]="node.title"
@@ -64,6 +85,7 @@
                        (blur)="stopEdit(node)"/>
             </div>
         </ng-template>
+
     </nz-spin>
 </div>
 

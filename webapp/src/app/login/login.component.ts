@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, HostListener, OnInit, Renderer2} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {LoginService} from './login.service';
 import {RegisterUser, ResetPwd, User} from '../model/user';
@@ -40,11 +40,15 @@ export class LoginComponent implements OnInit {
 
     constructor(private loginService: LoginService,
                 private messageService: NzMessageService,
-                private router: Router) {
+                private router: Router, private activatedroute: ActivatedRoute) {
     }
 
     ngOnInit() {
-
+        this.activatedroute.paramMap.subscribe(params => {
+            if (params.get('doaction') === 'doregister') {
+                this.registerBox();
+            }
+        });
     }
 
     formSubmit(): void {

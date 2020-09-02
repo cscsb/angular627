@@ -16,6 +16,9 @@ import {LoginComponent} from './login.component';
     RouterModule.forChild([{
       path: '',
       component: LoginComponent,
+    }, {
+      path: ':doaction',
+      component: LoginComponent,
     }]),
   ]
 })

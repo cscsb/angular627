@@ -331,13 +331,14 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
 
     // 复制
     copy(item: NzTreeNode) {
-        this.activeItemId = item.origin.id;
+        this.activeItemId = item.origin.menuId;
         this.setMenuItem();
     }
 
     // 剪切
     cut(item: NzTreeNode) {
-        this.activeItemId = item.origin.id;
+        console.log(item);
+        this.activeItemId = item.origin.menuId;
         this.setMenuItem();
     }
 
@@ -350,8 +351,10 @@ export class Note2Component implements OnInit, AfterViewInit, OnDestroy {
     // 粘贴
     paste(item: NzTreeNode) {
         this.targetItem = item;
-        this.moveItem.mid = item.origin.id;
+        this.moveItem.mid = item.origin.menuId;
         this.moveItem.itemid = this.activeItemId;
+        console.log(this.moveItem);
+        console.log(this.targetItem);
         this.note2Service.moveItem(this.moveItem).subscribe(res => {
             //  菜单粘贴 刷新左侧菜单 is_catalog:2
             //  节点粘贴 刷新右侧 is_catalog:3

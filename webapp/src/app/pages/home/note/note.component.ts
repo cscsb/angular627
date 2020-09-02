@@ -82,6 +82,7 @@ export class NoteComponent implements OnInit, AfterViewInit, OnDestroy {
             takeUntil(this.destroy$)
         )
             .subscribe(res => {
+                console.log(res);
                 this.addItemToOther(res.addKey, res.delKey.item.content);
                 this.delItem(res.delKey.item);
             }, error => {

@@ -9,6 +9,7 @@
             </button>
         </nz-button-group>
     </span>
+    <ng-container *ngIf="!user.userName">
     <span nz-col style="margin-left: 20px;">
     <a nz-button nzType="link" routerLink="/login/doregister">sign up</a>
     </span>
@@ -18,6 +19,18 @@
     <span nz-col style="margin-left: 20px;">
         network notepad
     </span>
+    </ng-container>
+    <ng-container *ngIf="user.userName">
+    <span nz-col style="margin-left: 20px;">
+    {{user.userName}}
+    </span>
+        <span nz-col style="margin-left: 20px;">
+    <a nz-button nzType="link" (click)="logout()">log out</a>
+    </span>
+        <span nz-col style="margin-left: 20px;">
+        network notepad
+    </span>
+    </ng-container>
 </div>
 
 

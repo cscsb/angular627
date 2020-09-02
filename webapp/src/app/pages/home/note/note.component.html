@@ -42,13 +42,17 @@
         </nz-dropdown-menu>
     </nz-header>
     <nz-layout style="background-color: #fff;">
-        <nz-sider [nzWidth]="550" style="padding-left: 24px;margin-bottom: 16px  ;overflow: hidden">
+        <div nz-row >
+        <div nz-col [nzSpan]="6" style="padding-left: 24px;margin-bottom: 16px  ;overflow: hidden" >
+
             <div style="overflow: scroll;height: calc(100% + 20px);width: 100%;position: relative;right: -20px">
                 <app-note2 #treeNode (clearList)="clearList()" (activatedNodeEmit)="activatedNodeChange($event)"
                            (menuList)="getMenuList($event)" (nodeList)="getItems()"></app-note2>
             </div>
-        </nz-sider>
-        <nz-content style="overflow:hidden;">
+
+        </div>
+        <div nz-col [nzSpan]="18" style="padding-left: 24px;margin-bottom: 16px  ;overflow: hidden">
+        <nz-content  >
             <div class="example-container flex" style="justify-content: space-between;
       flex-direction: column;height: 100%;display: flex;padding:0 24px;">
                 <nz-spin [nzSpinning]="isSpinning" style="flex-grow: 1;overflow-y: scroll">
@@ -97,5 +101,7 @@
                 </div>
             </div>
         </nz-content>
+        </div>
+        </div>
     </nz-layout>
 </nz-layout>

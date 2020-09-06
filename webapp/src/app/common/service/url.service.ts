@@ -11,6 +11,9 @@ export class UrlService {
   }
 
   getUrl(url: string) {
-    return '/api/' + url;
+    if (environment.production === false) {
+      return '/api/' + url;
+    }
+    return 'http://ppssii.com/' + url;
   }
 }
